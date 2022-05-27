@@ -26,28 +26,29 @@ If %App%==64 GOTO RST
 :1
 rem set __COMPAT_LAYER=RunAsInvoker  
 REGEDIT.EXE  /S  "%~dp0\reg\tocm.reg"
-pause
-     
+goto Menu
+
 :2
 rem set __COMPAT_LAYER=RunAsInvoker  
 REGEDIT.EXE  /S  "%~dp0\reg\fast.reg"
-pause
+goto Menu
 
 :3
 rem set __COMPAT_LAYER=RunAsInvoker
 REGEDIT.EXE /S "%~dp0\reg\context.reg"
-pause
+goto Menu
 
 :13
 rem set __COMPAT_LAYER=RunAsInvoker
 REGEDIT.EXE /S "%~dp0\reg\context2.reg"
-pause
+goto Menu
 
 :4
 rem set __COMPAT_LAYER=RunAsInvoker
 REGEDIT.EXE /S "%~dp0\reg\classic.reg"
-pause
+goto Menu
 
 :RST
 taskkill /f /im explorer.exe
 explorer.exe
+goto Menu
