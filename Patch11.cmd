@@ -32,6 +32,7 @@ If %App%==13 GOTO 13
 If %App%==14 GOTO 14
 If %App%==15 GOTO 15
 If %App%==64 GOTO RST
+If %App%==128 GOTO 128
 
 :1
 rem set __COMPAT_LAYER=RunAsInvoker  
@@ -89,6 +90,9 @@ If exist "%~dp0\dl\classic.reg" (
 )
 REGEDIT.EXE  /S  "%~dp0\dl\tocm.reg"
 exit
+
+:128
+start "" "https://scratch.mit.edu/discuss/topic/608121"
 
 :15
 cmd /c "Patch11WithAdmin.cmd"
