@@ -17,6 +17,7 @@ Echo 14 - Toggle classic taskbar icons
 Echo 15 - Restart Patch11 as administrator
 echo ------------------------
 Echo 64 - Restart Explorer (required for most patches)
+Echo 128 - Suggest a feature (opens defualt browser)
 
 Set /P App=Selection #
 If %App%=="" exit
@@ -33,30 +34,59 @@ If %App%==64 GOTO RST
 
 :1
 rem set __COMPAT_LAYER=RunAsInvoker  
-REGEDIT.EXE  /S  "%~dp0\reg\tocm.reg"
+If exist "%~dp0\dl\tocm.reg" (
+    echo 'File found, skipping download'
+) else {
+    echo 'Downloading required files'
+    curl -s -L https://dl.jaydendev.repl.co/tocm.reg -o dl\tocm.reg
+}
+REGEDIT.EXE  /S  "%~dp0\dl\tocm.reg"
 exit
 
-:2
 rem set __COMPAT_LAYER=RunAsInvoker  
-REGEDIT.EXE  /S  "%~dp0\reg\fast.reg"
+If exist "%~dp0\dl\fast.reg" (
+    echo 'File found, skipping download'
+) else {
+    echo 'Downloading required files'
+    curl -s -L https://dl.jaydendev.repl.co/fast.reg -o dl\tocm.reg
+}
+REGEDIT.EXE  /S  "%~dp0\dl\fast.reg"
 exit
 
 :3
-rem set __COMPAT_LAYER=RunAsInvoker
-REGEDIT.EXE /S "%~dp0\reg\context.reg"
+rem set __COMPAT_LAYER=RunAsInvoker  
+If exist "%~dp0\dl\context.reg" (
+    echo 'File found, skipping download'
+) else {
+    echo 'Downloading required files'
+    curl -s -L https://dl.jaydendev.repl.co/context.reg -o dl\tocm.reg
+}
+REGEDIT.EXE  /S  "%~dp0\dl\context.reg"
 exit
 
 :13
-rem set __COMPAT_LAYER=RunAsInvoker
-REGEDIT.EXE /S "%~dp0\reg\context2.reg"
+rem set __COMPAT_LAYER=RunAsInvoker  
+If exist "%~dp0\dl\context2.reg" (
+    echo 'File found, skipping download'
+) else {
+    echo 'Downloading required files'
+    curl -s -L https://dl.jaydendev.repl.co/context2.reg -o dl\context2.reg
+}
+REGEDIT.EXE  /S  "%~dp0\dl\context2.reg"
 exit
 
 :14
 cmd /c "explorer shell:::{05d7b0f4-2121-4eff-bf6b-ed3f69b894d9}"
 
 :4
-rem set __COMPAT_LAYER=RunAsInvoker
-REGEDIT.EXE /S "%~dp0\reg\classic.reg"
+rem set __COMPAT_LAYER=RunAsInvoker  
+If exist "%~dp0\dl\classic.reg" (
+    echo 'File found, skipping download'
+) else {
+    echo 'Downloading required files'
+    curl -s -L https://dl.jaydendev.repl.co/classic.reg -o dl\classic.reg
+}
+REGEDIT.EXE  /S  "%~dp0\dl\tocm.reg"
 exit
 
 :15
