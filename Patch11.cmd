@@ -1,26 +1,29 @@
 @echo off
-mkdir dl
+
+If exist "dl" (
+    echo DEBUG: Required directory already exists
+) else (
+    mkdir dl
+)
 
 :Menu
 Echo ----------------------------------------------------------------
-Echo Patch11, patch installer
-Echo Ver: dev
+echo [101;93m Patch11 [0m
 Echo ----------------------------------------------------------------
-Echo 1 - Take ownership context menu command
-Echo 2 - Fast delete context menu command
-Echo 3 - Classic context menu
-Echo 4 - Classic file explorer, taskbar, and UI
-Echo 5 - Disable/Enable rounded corners
-Echo 6 - Enroll in insider program on unsupported device
+echo [46m 1 - Take ownership context menu item[0m
+echo [46m 2 - Fast delete context menu[0m
+echo [46m 3 - Classic context menu[0m
+echo [46m 4 - Enable/disable rounded corners[0m
+echo [46m 5 - Enroll in insider program on unsupported device[0m
 echo ------------------------
-Echo 13 - Restore default context menu
-Echo 14 - Toggle classic taskbar icons
-Echo 15 - Restart Patch11 as administrator
+Echo [46m 13 - Restore default context menu[0m
+Echo [46m 14 - Toggle classic taskbar icons[0m
+Echo [46m 15 - Restart Patch11 as administrator[0m
 echo ------------------------
-Echo 64 - Restart Explorer (required for most patches)
-Echo 128 - Suggest a feature (opens defualt browser)
+Echo [46m 64 - Restart Explorer (required for most patches)[0m
+Echo [46m 128 - Suggest a feature (opens defualt browser)[0m
 
-Set /P App=Selection #
+Set /P App=Type the # of your selection 
 If %App%=="" exit
 If %App%==1 GOTO 1
 If %App%==2 GOTO 2
@@ -93,6 +96,7 @@ exit
 
 :128
 start "" "https://scratch.mit.edu/discuss/topic/608121"
+exit
 
 :15
 cmd /c "Patch11WithAdmin.cmd"
