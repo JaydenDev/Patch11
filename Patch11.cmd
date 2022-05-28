@@ -62,6 +62,11 @@ exit
 
 :5
 mkdir dl
-curl -L https://github.com/valinet/Win11DisableRoundedCorners/releases/latest/download/Win11DisableOrRestoreRoundedCorners.exe -o dl\roundedcorners.exe
+If exist "%~dp0\dl\roundedcorners.exe" (
+    Echo File already downloaded, skipping
+) else (
+    echo Downloading required files
+    curl -s -L https://github.com/valinet/Win11DisableRoundedCorners/releases/latest/download/Win11DisableOrRestoreRoundedCorners.exe -o dl\roundedcorners.exe
+    echo File downloaded, running task
+)
 dl\roundedcorners.exe
-
