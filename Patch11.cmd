@@ -10,9 +10,11 @@ Echo 2 - Fast delete context menu command
 Echo 3 - Classic context menu
 Echo 4 - Classic file explorer, taskbar, and UI
 Echo 5 - Disable/Enable rounded corners
+Echo 6 - Enroll in insider program on unsupported device
 echo ------------------------
 Echo 13 - Restore default context menu
 Echo 14 - Toggle classic taskbar icons
+Echo 15 - Restart Patch11 as administrator
 echo ------------------------
 Echo 64 - Restart Explorer (required for most patches)
 
@@ -23,8 +25,10 @@ If %App%==2 GOTO 2
 If %App%==3 GOTO 3
 If %App%==4 GOTO 4
 If %App%==5 GOTO 5
+If %App%==6 GOTO 6
 If %App%==13 GOTO 13
 If %App%==14 GOTO 14
+If %App%==15 GOTO 15
 If %App%==64 GOTO RST
 
 :1
@@ -55,6 +59,10 @@ rem set __COMPAT_LAYER=RunAsInvoker
 REGEDIT.EXE /S "%~dp0\reg\classic.reg"
 exit
 
+:15
+cmd /c "Patch11WithAdmin.cmd"
+exit
+
 :RST
 taskkill /f /im explorer.exe
 explorer.exe
@@ -70,3 +78,14 @@ If exist "%~dp0\dl\roundedcorners.exe" (
     echo File downloaded, running task
 )
 dl\roundedcorners.exe
+
+:6
+If exist "%~dp0\dl\insider.zip" (
+    Echo File already downloaded, skipping
+) else (
+    echo Downloading required files
+    curl -s -L https://github.com/abbodi1406/offlineinsiderenroll/releases/download/2.6.3/OfflineInsiderEnroll-2.6.3.zip -o dl\insider.zip
+)
+powershell -command "Expand-Archive %~dp0\dl\insider.zip %~dp0\dl\insider"
+start cmd.exe /c "%~dp0\dl\insider\OfflineInsiderEnroll.cmd"
+pause
