@@ -8,7 +8,7 @@ If exist "dl" (
 
 :Menu
 Echo ----------------------------------------------------------------
-echo [101;93m Patch11 [0m
+echo [101;93m Patch11 Version 1.0 [0m
 Echo ----------------------------------------------------------------
 echo [46m 1 - Take ownership context menu item[0m
 echo [46m 2 - Fast delete context menu[0m
