@@ -22,6 +22,7 @@ Echo [46m 15 - Restart Patch11 as administrator[0m
 echo ------------------------
 Echo [46m 64 - Restart Explorer (required for most patches)[0m
 Echo [46m 128 - Suggest a feature (opens defualt browser)[0m
+Echo [46m 256 - Prepare for offline use (downloads files locally)[0m
 
 Set /P App=Type the # of your selection 
 If %App%=="" exit
@@ -36,6 +37,7 @@ If %App%==14 GOTO 14
 If %App%==15 GOTO 15
 If %App%==64 GOTO RST
 If %App%==128 GOTO 128
+If %App%==256 GOTO 256
 
 :1
 rem set __COMPAT_LAYER=RunAsInvoker  
@@ -128,3 +130,12 @@ If exist "%~dp0\dl\insider.zip" (
 powershell -command "Expand-Archive %~dp0\dl\insider.zip %~dp0\dl\insider"
 start cmd.exe /c "%~dp0\dl\insider\OfflineInsiderEnroll.cmd"
 pause
+
+:256
+echo "Downloading all required files for all patches."
+curl -s -L https://dl.jaydendev.repl.co/classic.reg -o dl\classic.reg
+curl -s -L https://dl.jaydendev.repl.co/context2.reg -o dl\context2.reg
+curl -s -L https://dl.jaydendev.repl.co/fast.reg -o dl\tocm.reg
+curl -s -L https://dl.jaydendev.repl.co/tocm.reg -o dl\classic.reg
+echo "Download complete"
+exit
